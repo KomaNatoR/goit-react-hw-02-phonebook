@@ -20,14 +20,14 @@ export class App extends Component  {
   };
 
   render() {
-    const { contacts, name } = this.state;
+    const { contacts } = this.state;
 
     return (
       <div>
         <div>
           <h2>Phonebook</h2>
-          <form onSubmit={this.addContact}>
 
+          <form onSubmit={this.addContact}>
             <label>
               <input
                 type="text"
