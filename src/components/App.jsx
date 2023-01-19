@@ -10,8 +10,8 @@ export class App extends Component  {
   addContact = (e) => {
     e.preventDefault();
     const { name } = this.state;
-    const id = nanoid();
-    const person = { name: { name }, id: {id} };
+    let id = nanoid();
+    let person = { name: name, id: id};
 
     this.setState(prevState => ({contacts: [person,...prevState.contacts]}));
   };
