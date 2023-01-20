@@ -20,9 +20,10 @@ export class App extends Component  {
 // ----------------- ADD CONTACT -------------------
   addContact = (person) => {
     const { contacts } = this.state;
-    const contactsMap = contacts.find(cont => cont.name === person.name);
+    const personNormalize = person.name.toLowerCase();
+    const contactsMap = contacts.find(cont => cont.name.toLowerCase() === personNormalize);
 
-    if (contactsMap) return alert("Ей, так не можна!");
+    if (contactsMap) return alert("Привіт, тут виправив! ;)");
     this.setState(prevState => ({contacts: [person,...prevState.contacts]}));
   };
 // ----------------- FILTER CONTACT ------------------
@@ -50,7 +51,7 @@ export class App extends Component  {
         <Form onSubmit={this.addContact} />
       
         <h2>Contacts</h2>  
-        <Filter onChange={this.filterName} />
+        <Filter onChange={this.filterName} value={this.state.filter} />
         <ContactList renderData={visiblePersons} onClick={ this.deleteContact} />
       </MainDiv>
     );

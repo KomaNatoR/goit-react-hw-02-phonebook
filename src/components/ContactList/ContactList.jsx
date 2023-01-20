@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 const ContactList = ({ renderData, onClick }) => {
-    console.log(renderData);
     return (
         <ul>
             {renderData.map(cont => (<li key={cont.id}>
