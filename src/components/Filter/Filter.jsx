@@ -1,4 +1,4 @@
-
+import PropTypes from 'prop-types';
 
 const Filter = ({ onChange }) => {
     return (
@@ -7,4 +7,8 @@ const Filter = ({ onChange }) => {
         </label>
     ); 
 };
+Filter.propTypes = {
+    onChange:PropTypes.func.isRequired,
+};
+
 export default Filter;

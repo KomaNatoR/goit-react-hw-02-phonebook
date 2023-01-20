@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 
-
-const ContactList = ({renderData,onClick}) => {
+const ContactList = ({ renderData, onClick }) => {
+    console.log(renderData);
     return (
         <ul>
             {renderData.map(cont => (<li key={cont.id}>
@@ -11,4 +12,16 @@ const ContactList = ({renderData,onClick}) => {
         </ul>
     );
 };
+ContactList.defaultProps = {
+    renderData:[],
+}
+ContactList.propTypes = {
+    renderData: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        number:PropTypes.string.isRequired,
+    }),),
+    onClick: PropTypes.func.isRequired,
+};
+
 export default ContactList;
