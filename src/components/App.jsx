@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Form from "./Form/Form";
 import Filter from "./Filter/Filter";
 import ContactList from "./ContactList/ContactList";
+import { MainDiv } from "./app.styled";
 
 export class App extends Component  {
   state = {
@@ -13,18 +14,30 @@ export class App extends Component  {
       {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
     ],
     filter: '',
-    name: '',
-    number: ''
   };
 
+
+// ----------------- ADD CONTACT -------------------
   addContact = (person) => {
+    const { contacts } = this.state;
+    const contactsMap = contacts.find(cont => cont.name === person.name);
+
+    if (contactsMap) return alert("Ей, так не можна!");
     this.setState(prevState => ({contacts: [person,...prevState.contacts]}));
   };
-
+// ----------------- FILTER CONTACT ------------------
   filterName = (e) => {
     this.setState({ filter: e.currentTarget.value });
   };
+// -----------------DELETE CONTACT --------------------
+  deleteContact = (contId) => {
+    const { contacts } = this.state;
+    const filterContact = contacts.filter(cont => cont.id !== contId);
+    
+    this.setState(prevState=>({contacts: filterContact}));
+  };
 
+  // ---------------RENDER-----------------------
   render() {
     const { contacts, filter } = this.state;
     
@@ -32,14 +45,14 @@ export class App extends Component  {
     const visiblePersons = contacts.filter(cont=>cont.name.toLowerCase().includes(normalizeFilter));
 
     return (
-      <div>
+      <MainDiv>
         <h2>Phonebook</h2>
         <Form onSubmit={this.addContact} />
       
         <h2>Contacts</h2>  
         <Filter onChange={this.filterName} />
-        <ContactList render={ visiblePersons} />
-      </div>
+        <ContactList renderData={visiblePersons} onClick={ this.deleteContact} />
+      </MainDiv>
     );
   }
 };
