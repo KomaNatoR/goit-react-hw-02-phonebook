@@ -4,6 +4,7 @@ import Form from "./Form/Form";
 import Filter from "./Filter/Filter";
 import ContactList from "./ContactList/ContactList";
 import { MainDiv } from "./app.styled";
+import FormikForm from "./FormikForm/FormikForm";
 
 export class App extends Component  {
   state = {
@@ -23,7 +24,7 @@ export class App extends Component  {
     const personNormalize = person.name.toLowerCase();
     const contactsMap = contacts.find(cont => cont.name.toLowerCase() === personNormalize);
 
-    if (contactsMap) return alert("Привіт, тут виправив! ;)");
+    if (contactsMap) return alert("Pleace don't do it!");
     this.setState(prevState => ({contacts: [person,...prevState.contacts]}));
   };
 // ----------------- FILTER CONTACT ------------------
@@ -49,10 +50,11 @@ export class App extends Component  {
       <MainDiv>
         <h2>Phonebook</h2>
         <Form onSubmit={this.addContact} />
+        <FormikForm onSubmit={this.addContact} />
       
         <h2>Contacts</h2>  
         <Filter onChange={this.filterName} value={this.state.filter} />
-        <ContactList renderData={visiblePersons} onClick={ this.deleteContact} />
+        <ContactList renderData={visiblePersons} onClick={this.deleteContact} />
       </MainDiv>
     );
   }
